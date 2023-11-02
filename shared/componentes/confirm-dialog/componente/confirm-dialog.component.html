@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div style = "white-space: pre-line" mat-dialog-content>
+    <p>{{data.message}}</p>
+</div>
+<div mat-dialog-actions>   
+    <ng-template [ngIf]="!data.isErrorMsg">
+        <button mat-button (click)="cancelClick()">{{data.cancelText}}</button>
+    </ng-template>        
+    <button mat-button (click)="confirmClick()" cdkFocusInitial> {{data.confirmText}}</button>
+</div>

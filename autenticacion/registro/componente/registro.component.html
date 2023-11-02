@@ -1,0 +1,68 @@
+<div class="center-spinner" *ngIf="isLoading('registering')">
+    <app-spinner [overlay]=true></app-spinner>
+</div>    
+<mat-vertical-stepper [linear]="true" #stepper animationDuration=500 [ngStyle]="{'max-width.px':400, 'border-radius.px': 10 }">
+    <mat-step [stepControl]="form1">
+        <form [formGroup]="form1" [ngStyle]="{'max-width.px': 380}">
+            <ng-template matStepLabel>Ingresa un usuario y Contraseña</ng-template>
+            <mat-form-field>
+                    <input matInput type="text" placeholder="Usuario" formControlName="username" autocomplete="off" required>
+                    <mat-error *ngIf="form1.controls['username'].errors?.['email']">Correo inválido</mat-error>
+                    <mat-error *ngIf="form1.controls['username'].errors?.['required']">Correo requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                    <input matInput type="password" placeholder="Contraseña" formControlName="password" autocomplete="off" required>
+                    <mat-error *ngIf="form1.controls['password'].errors?.['required']">Contraseña Requerida</mat-error>
+                    <mat-error *ngIf="form1.controls['password'].errors?.['minLength']">Mínimo de 8 Caracteres Requerido.</mat-error>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="form2">
+        <form [formGroup]="form2">
+            <ng-template matStepLabel>Repite el usuario y contraseña del paso anterior</ng-template>
+            <p><mat-form-field>
+                    <input matInput type="text" placeholder="Usuario" formControlName="repetir_username"  autocomplete="off" required>
+                    <mat-error *ngIf="form2.controls['repetir_username'].errors?.['email']">Correo inválido</mat-error>
+                    <mat-error *ngIf="form2.controls['repetir_username'].errors?.['required']">Correo requerido</mat-error>
+            </mat-form-field></p>
+            <p><mat-form-field>
+                    <input matInput type="password" placeholder="Contraseña" formControlName="repetir_password"  autocomplete="off" required>
+                    <mat-error *ngIf="form2.controls['repetir_password'].errors?.['required']">Contraseña Requerida</mat-error>
+                    <mat-error *ngIf="form2.controls['repetir_password'].errors?.['minLength']">Mínimo de 8 Caracteres Requerido.</mat-error>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Atras</button>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="form3">        
+        <form [formGroup]="form3">
+            <ng-template matStepLabel>Ingrese su nombre y apellidos</ng-template>
+            <p><mat-form-field>
+                <input matInput type="text" placeholder="Nombre" formControlName="nombre" autocomplete="off" required>
+                <mat-error *ngIf="form3.controls['nombre'].errors?.['required']">Campo requerido</mat-error>
+            </mat-form-field></p>
+            <p><mat-form-field>
+                <input matInput type="text" placeholder="Apellidos" formControlName="apellido" autocomplete="off" required>
+                <mat-error *ngIf="form3.controls['apellido'].errors?.['required']">Campo requerido</mat-error>        
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Atras</button>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>            
+        </form>        
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Finalize el proceso</ng-template>
+        <p [ngStyle]="{'color': 'blue', 'padding.px': 10}">Presione en Registrar. Posteriormente le será enviado un correo de verificacion</p>
+        <div [ngStyle]="{'display': 'flex', 'align-items': 'center'}">
+            <button mat-button matStepperPrevious>Regresar</button>
+            <button mat-button (click)="Registrar()">Registrar</button>
+            <button mat-button (click)="stepper.reset()">Intentar de nuevo</button>
+        </div>
+    </mat-step>
+</mat-vertical-stepper>

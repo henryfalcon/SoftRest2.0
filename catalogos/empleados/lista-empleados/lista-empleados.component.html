@@ -1,0 +1,22 @@
+<form (ngSubmit)="submit()" class="normal-form" #formDirective="ngForm">
+    <div class="center-spinner" *ngIf="isLoading('loading')">
+        <app-spinner [overlay]=true></app-spinner>
+    </div>
+
+    <ng-template [ngIf]="empleados != undefined && empleados.length > 0" [ngIfElse]="norecords">
+        <app-table 
+            [data]="empleados"
+            [columns]="tableColumns"
+            (registroTableSelected) = "registroSeleccionado($event)">
+        </app-table>
+    </ng-template>
+        
+    <ng-template #norecords>    
+        <p>No existen registros de Empleados en la base de datos</p>
+        <button type = "submit" mat-button color="primary" 
+            [disabled]="isLoading('loading')">
+            Registrar Empleado
+        </button>   
+    </ng-template>
+</form>
+

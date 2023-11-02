@@ -1,0 +1,18 @@
+<mat-card [ngStyle]="{
+    'width.px': 180, 
+    'heigth.px': 180 }">
+    <img mat-card-image [ngStyle]="{'object': 'fit', 'border-radius.px':'5'}"
+        [src]="imagesrc || 'http://placehold.it/180'" alt="Fotografia" async>
+</mat-card>
+<mat-card-actions align="start" [ngStyle]="{'margin-left.px': 10}">
+    <button mat-button (click)="fileInput.click()" [disabled]="isLoading('uploadingFoto')">
+        Seleccionar
+    </button>
+    <button mat-button 
+        [disabled]="isLoading('uploadingFoto') || !fotografia_selected" 
+        (click)="ValidarGuardarFoto()">
+        Guardar</button>
+</mat-card-actions>
+<input type="file" #fileInput accept='image/*' 
+    (change)="selectFile($event)" 
+    multiple style="display:none;" />

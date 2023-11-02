@@ -1,0 +1,34 @@
+<mat-toolbar>    
+    <button mat-icon-button #tooltip="matTooltip" matTooltip="Menu"
+        (click)="MostrarSideMenu()"        
+        [disabled]="!userLogged">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span> SoftRest.  El Aguachilito sa de cv </span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button  #tooltip="matTooltip" matTooltip="Nuevo Registro"
+        *ngIf="mostrarButonesAltaListar"    
+        (click)="nuevoRegistro()"> 
+        <mat-icon>note_add</mat-icon>
+    </button>        
+    <button mat-icon-button  #tooltip="matTooltip" matTooltip="Listar"
+        *ngIf="mostrarButonesAltaListar"    
+        (click)="listarRegistros()"> 
+        <mat-icon>toc</mat-icon>
+    </button>
+    <button mat-icon-button  #tooltip="matTooltip" matTooltip="Login"
+        (click)="LogIn()"
+        *ngIf="!userLogged"> 
+        <mat-icon>login</mat-icon>
+    </button>
+    <button mat-icon-button  #tooltip="matTooltip" matTooltip="Logout"
+        (click)="LogOut()"
+        *ngIf="userLogged">        
+        <mat-icon>logout</mat-icon>  
+    </button>
+    <button mat-icon-button  #tooltip="matTooltip" matTooltip="Registrarse"
+        (click)="registrarse()"
+        *ngIf="!userLogged">        
+        <mat-icon>face</mat-icon>  
+    </button>
+</mat-toolbar>  

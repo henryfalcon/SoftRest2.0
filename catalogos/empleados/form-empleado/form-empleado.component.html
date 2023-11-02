@@ -1,0 +1,250 @@
+<form [formGroup]="empleadoForm" class="normal-form" #formDirective="ngForm">
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle #matPanel1>
+            <div class="center-spinner" *ngIf="isLoading('loading')">
+                <app-spinner [overlay]=true></app-spinner>
+            </div>
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'violet'}">
+                    Empleado
+                </mat-panel-title>
+                <mat-panel-description>
+                    Datos
+                    <mat-icon>account_circle</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class='controls_panel1'>
+                <mat-grid-list cols="2" rowHeight="330px">
+                    <mat-grid-tile>
+                        <div class="controles-container">
+                            <mat-form-field [ngStyle]="{'margin-left.px': 10}">
+                                <input matInput placeholder="Nombre" formControlName="nombre"
+                                    (keydown.enter)="$event.preventDefault()">
+                                <mat-error>Campo requerido.</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput placeholder="Apellido Paterno" formControlName="aPaterno"
+                                    (keydown.enter)="$event.preventDefault()">
+                                <mat-error>Campo requerido.</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput placeholder="Apellido Materno" formControlName="aMaterno"
+                                    (keydown.enter)="$event.preventDefault()">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Nacionalidad</mat-label>
+                                <select matNativeControl required formControlName="nacionalidad">
+                                    <option label="Seleccione" selected></option>
+                                    <option value="mexicano">Mexicano/a</option>
+                                    <option value="extranjero">Extranjero/a</option>
+                                </select>
+                                <mat-error>Campo requerido.</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input formControlName="fechaNacimiento" (keydown.enter)="$event.preventDefault()"
+                                    matInput [matDatepicker]="pickerfecnac" placeholder="Fecha Nacimiento">
+                                <mat-datepicker-toggle matSuffix [for]="pickerfecnac"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerfecnac></mat-datepicker>
+                                <mat-error>Campo requerido.</mat-error>
+                            </mat-form-field>
+                            <mat-radio-group [ngStyle]="{'margin-left.px':20}" formControlName="sexo"
+                                (keydown.enter)="$event.preventDefault()">
+                                <mat-radio-button value="masculino">Masculino</mat-radio-button>
+                                <mat-radio-button value="femenino">Femenino</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <div class="controles-container">
+                            <mat-form-field [ngStyle]="{'margin-left.px':10, 'margin-top.px':5}">
+                                <mat-label>Tipo Sanguineo</mat-label>
+                                <select matNativeControl required formControlName="tipoSanguineo">
+                                    <option label="Seleccione" selected></option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </mat-form-field>
+                            <mat-form-field [ngStyle]="{'margin-top.px':5}">
+                                <mat-label>Tipo Contrato</mat-label>
+                                <select matNativeControl required formControlName="tipoContrato">
+                                    <option label="Seleccione" selected></option>
+                                    <option value="Temporal">Temporal</option>
+                                    <option value="Permanente">Permanente</option>
+                                </select>
+                            </mat-form-field>
+                            <mat-form-field [ngStyle]="{'margin-top.px':5}">
+                                <mat-label>Departamento</mat-label>
+                                <select matNativeControl required #matSelectDepto
+                                    (ngModelChange)="onDepartamentoSelection($event)" formControlName="idDepto">
+                                    <option label="Seleccione" selected></option>
+                                    <option *ngFor="let depto of departamentos" [value]="depto.idDepto">
+                                        {{depto.departamento}}
+                                    </option>
+                                </select>
+                            </mat-form-field>
+                            <mat-form-field [ngStyle]="{'margin-top.px':5}">
+                                <mat-label>Puesto</mat-label>
+                                <select matNativeControl required formControlName="idPuesto"
+                                    (ngModelChange)="onPuestoSelection($event)" [(ngModel)]="selectedPuestoDefault">
+                                    <option label="Seleccione" selected></option>
+                                    <option *ngFor="let psts of puestos" [disabled]="psts.deshabilitar"
+                                        [value]="psts.idPuesto">
+                                        {{psts.puesto}}
+                                    </option>
+                                </select>
+                            </mat-form-field>
+                            <mat-form-field [ngStyle]="{'margin-top.px':5}">
+                                <input formControlName="fechaContrato" (keydown.enter)="$event.preventDefault()"
+                                    matInput [matDatepicker]="pickerfeccont" placeholder="Fecha Contrato">
+                                <mat-datepicker-toggle matSuffix [for]="pickerfeccont"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerfeccont></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'blue'}">
+                    Contacto
+                </mat-panel-title>
+                <mat-panel-description>
+                    Email, telefono, etc.
+                    <mat-icon>phone_forwarded</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class='controls_panel2'>
+                <mat-form-field [ngStyle]="{'margin-left.px':10, 'margin-top.px': 15}">
+                    <input matInput placeholder="email" formControlName="email"
+                        (keydown.enter)="$event.preventDefault()">
+                    <mat-error>Correo inválido.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Telefono Celular" formControlName="telCelular"
+                        (keydown.enter)="$event.preventDefault()">
+                    <mat-error>Numero de telefono inválido.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Nombre Contacto" formControlName="contacto"
+                        (keydown.enter)="$event.preventDefault()">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Telefono Contacto" formControlName="telContacto"
+                        (keydown.enter)="$event.preventDefault()">
+                    <mat-error>Numero de telefono inválido.</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Telefono Casa" formControlName="telCasa"
+                        (keydown.enter)="$event.preventDefault()">
+                    <mat-error>Numero de telefono inválido.</mat-error>
+                </mat-form-field>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+            <div class="center-spinner" *ngIf="isLoading('loading')">
+                <app-spinner [overlay]=true></app-spinner>
+            </div>
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'green'}">
+                    Direccion
+                </mat-panel-title>
+                <mat-panel-description>
+                    Calle, ciudad, etc.
+                    <mat-icon>location_city</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="controls_panel3">
+                <mat-form-field [ngStyle]="{'margin-left.px': 10}">
+                    <input matInput placeholder="Calle" formControlName="calle"
+                        (keydown.enter)="$event.preventDefault()">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="No. Ext" formControlName="noExt"
+                        (keydown.enter)="$event.preventDefault()">
+                    <mat-error *ngIf="empleadoForm.controls['noExt'].hasError('pattern')">
+                        Escriba solo numeros
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="No. Int" formControlName="noInt"
+                        (keydown.enter)="$event.preventDefault()">
+                    <mat-error *ngIf="empleadoForm.controls['noInt'].hasError('pattern')">
+                        Escriba solo numeros
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Manzana" formControlName="mza"
+                        (keydown.enter)="$event.preventDefault()">
+                    <mat-error *ngIf="empleadoForm.controls['mza'].hasError('pattern')">
+                        Escriba solo numeros
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Lote" formControlName="lote" (keydown.enter)="$event.preventDefault()">
+                    <mat-error *ngIf="empleadoForm.controls['lote'].hasError('pattern')">
+                        Escriba solo numeros
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Pais" formControlName="pais" (keydown.enter)="$event.preventDefault()">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Estado" formControlName="estado"
+                        (keydown.enter)="$event.preventDefault()">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Codigo Postal" #codpostal maxlength="5" formControlName="codPostal"
+                        (keydown.enter)="$event.preventDefault()">
+                    <mat-hint align="end">{{codpostal.value.length}}/5</mat-hint>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Ciudad" formControlName="ciudad"
+                        (keydown.enter)="$event.preventDefault()">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Municipio" formControlName="mpio"
+                        (keydown.enter)="$event.preventDefault()">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Colonia" formControlName="colonia"
+                        (keydown.enter)="$event.preventDefault()">
+                </mat-form-field>
+            </div>
+            <mat-action-row>
+                <button mat-button color="primary" 
+                    [disabled]="isLoading('loading')  || !anyFormChange()"
+                    (click) = "Guardar(formDirective)">
+                    Guardar
+                </button>
+            </mat-action-row>
+        </mat-expansion-panel>  
+        <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle [disabled]="tipoForm == 'Alta'">
+            <div class="center-spinner" *ngIf="isLoading('uploadingFoto')">
+                <app-spinner [overlay]=true></app-spinner>
+            </div>            
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'purple'}">
+                    Fotografia
+                </mat-panel-title>
+                <mat-panel-description>                                        
+                    Asignar foto
+                    <mat-icon>camera_enhance</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>            
+            <div class="controles-container">
+                <app-upload-photo-section
+                    [idElemento] = "idEmpleado"
+                    [imageSrc] = "imageSrc"
+                    (fotoUrlUploaded) = "fotoEmpleadoUrl($event)"
+                ></app-upload-photo-section>
+            </div>
+        </mat-expansion-panel>        
+    </mat-accordion>
+</form>

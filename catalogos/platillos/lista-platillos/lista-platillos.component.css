@@ -1,0 +1,22 @@
+.example-container {
+    width: 100%; 
+    height: calc(100vh - 40px);
+    overflow: auto;
+}
+
+form.normal-form{
+    margin: 10px;
+    width: 800px;        
+}
+
+.controles-container {
+    width: 100%;
+    padding: 5%;
+    margin-left: 0%;
+}
+
+.controles-container > * {
+    width: 100%;
+}
+
+

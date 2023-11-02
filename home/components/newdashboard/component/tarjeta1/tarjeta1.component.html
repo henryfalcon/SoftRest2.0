@@ -1,0 +1,20 @@
+<div class="slider" [ngStyle]="{'display': 'flex', 'width.px': 700, 'margin-left.px':0}">
+    <app-image-slider [slides]="slides" [ngStyle]="{'width.px': 300}">
+    </app-image-slider>
+    <mat-card [ngStyle]="{'margin-left.px': 20,'width.px': 250}">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title class="mat-h4">Restaurante Aguachilito</mat-card-title>
+            <mat-card-subtitle>Desde 1990</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                Platillos Tipicos de la region. Comida con corazon y el mejor sazon
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>Facebook</button>
+            <button mat-button>Twitter</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

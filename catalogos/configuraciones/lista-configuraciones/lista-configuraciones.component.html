@@ -1,0 +1,9 @@
+
+<ng-template [ngIf]="configuraciones != undefined && configuraciones.length > 0" [ngIfElse]="norecords">
+    <app-table-list [tableData]="configuraciones"></app-table-list>
+</ng-template>
+
+<ng-template #norecords>    
+    <p>No existen registros de Configuraciones en la base de datos</p>
+    <button mat-button>Registrar Configuracion</button>
+</ng-template>

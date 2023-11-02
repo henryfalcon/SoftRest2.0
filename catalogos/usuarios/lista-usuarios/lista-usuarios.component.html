@@ -1,0 +1,10 @@
+
+<ng-template [ngIf]="usuarios != undefined && usuarios.length > 0" [ngIfElse]="norecords">
+    <app-table-list [tableData]="usuarios"></app-table-list>
+</ng-template>
+
+<ng-template #norecords>    
+    <p>No existen registros de usuarios en la base de datos</p>
+    <button mat-button>Registrar Usuario</button>
+</ng-template>
+

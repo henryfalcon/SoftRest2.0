@@ -1,0 +1,9 @@
+
+export interface TableColumn {
+    label:string
+    def:string
+    dataKey:string
+    format?:string
+    dataType?: 'date' | 'object'
+    position?: 'right' | 'left';
+}

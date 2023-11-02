@@ -1,0 +1,28 @@
+.slider {
+    width: 350px;
+    height: 220px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
+  mat-grid-tile {
+    background: lightblue; 
+    width: 350px;
+    
+  }  
+  
+  .example-card {
+    max-width: 400px;
+    margin-bottom: 8px;
+  }
+  
+  mat-card-title, mat-card-content, mat-card-footer {
+    display:flex;
+    justify-content: center;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  

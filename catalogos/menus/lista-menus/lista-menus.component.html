@@ -1,0 +1,10 @@
+
+<ng-template [ngIf]="menus !== undefined && menus.length > 0" [ngIfElse]="norecords">
+    <app-table-list [tableData]="menus"></app-table-list>
+</ng-template>
+
+<ng-template #norecords>    
+    <p>No existen registros de Menus en la base de datos</p>
+    <button mat-button>Registrar Menu</button>
+</ng-template>
+

@@ -1,0 +1,22 @@
+<mat-drawer-container class="container" autosize>
+    <mat-drawer #drawer1 class="sidenav" mode="side" position = "start">
+        <mat-selection-list [multiple]="false">
+            <mat-list-option #option1 *ngFor="let menu_item of Menu_Items" [value]="menu_item"
+                (click) = "drawer2.toggle()">
+                {{menu_item}}
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-drawer>
+    <mat-drawer #drawer2 class="sidenav" mode="over" position = "end">
+        <mat-selection-list [multiple]="false">
+            <mat-list-option #option2 *ngFor="let submenu_item of Submenu_Items" [value]="submenu_item"
+                (click) = "drawer2.toggle()">
+                {{submenu_item}}
+            </mat-list-option>                
+        </mat-selection-list>
+    </mat-drawer>
+    <div class="sidenav-content">
+        <router-outlet></router-outlet>        
+    </div>
+</mat-drawer-container>
+

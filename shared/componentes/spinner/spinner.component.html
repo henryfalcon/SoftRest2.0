@@ -1,0 +1,12 @@
+<ng-container *ngIf="overlay;else progressSpinner">
+    <div>
+        <div>
+            <ng-template [ngTemplateOutlet]="progressSpinner"></ng-template>
+        </div>
+    </div>
+</ng-container>
+<ng-template #progressSpinner>
+    <mat-progress-spinner [diameter]="100" strokeWidth="5" mode="indeterminate" [color]="color" [strokeWidth]="strokeWidth"
+        [value]="value">
+    </mat-progress-spinner>
+</ng-template>

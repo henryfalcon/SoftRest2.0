@@ -1,0 +1,33 @@
+form.normal-form{
+    margin: 10px;
+    width: 800px;
+}
+
+.controles-container {
+    width: 100%;
+    padding: 5%;
+    margin-left: 0%;
+}
+
+.controles-container > * {
+    width: 100%;
+}
+
+mat-radio-button {
+    margin-right: 15px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}                                                       
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
