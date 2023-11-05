@@ -1,12 +1,13 @@
 export type status = 'Activo' | 'Inactivo'
 
 export interface MenuI {
-    id_menu: string;
+    idMenu: string;
     menu: string;
     fecha_inicio: Date;
+    fecha_inicio_str?: string
     status: status;
-    usuario_creacion: string;
-    fecha_creacion: Date
-    usuario_modifica?: string;
-    fecha_modificacion: Date
+    user_creation?: string
+    fecha_creation?: Date;
+    fecha_creation_str?: string
+    foto?: string
 }

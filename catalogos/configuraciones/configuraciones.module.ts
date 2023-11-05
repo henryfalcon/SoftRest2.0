@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { ConfiguracionesRoutingModule } from './configuraciones-routing.module';
 //components
 import { ListaConfiguracionesComponent } from './lista-configuraciones/lista-configuraciones.component';
-import { TableListComponent } from './table-view/table-list.component';
 //confirm dialog
 import { ConfirmDialogModule } from '../../shared/componentes/confirm-dialog/confirm-dialog.module';
 //material
@@ -20,8 +19,7 @@ import { FormularioComponent } from './formulario/formulario.component';
     CommonModule,
     FormsModule,    
     ConfiguracionesRoutingModule,
-    ConfirmDialogModule,    
-    TableListComponent,
+    ConfirmDialogModule,      
     MatButtonModule,
   ]
 })  

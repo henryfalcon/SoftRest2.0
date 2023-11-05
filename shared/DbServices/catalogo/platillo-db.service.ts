@@ -51,9 +51,18 @@ export class PlatilloDbService {
     return throwError(()=>new Error(errorMsg));      
   }
 
+  private get_strdate(fecha: Date): string {
+    let a: Date = fecha;
+    let strdate: string = 'seconds:' + (a.getTime()/1000).toString() + ', nanosecons: 0';    
+    return strdate;
+  }
+
   addPlatillo(platillo: PlatilloI): Promise<Boolean> {
     let new_id = this.afs.createId()
     platillo.idPlatillo = new_id
+    platillo.fecha_alta = new Date();    
+    platillo.fecha_alta_str = this.get_strdate(new Date())
+
     return this.afs.collection<PlatilloI>('Platillos')
       .doc(new_id)
         .set(platillo)

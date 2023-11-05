@@ -3,6 +3,7 @@ export interface PlatilloI {
     desc_corta: string
     desc_larga: string
     ingredientes?: string
+    receta?: string
     acompanamiento?: string
     guarnicion?: string
     idCategoria: string

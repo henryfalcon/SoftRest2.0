@@ -11,7 +11,8 @@
     <button mat-button 
         [disabled]="isLoading('uploadingFoto') || !fotografia_selected" 
         (click)="ValidarGuardarFoto()">
-        Guardar</button>
+        Guardar
+    </button>
 </mat-card-actions>
 <input type="file" #fileInput accept='image/*' 
     (change)="selectFile($event)" 

@@ -3,6 +3,7 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 //models
 import { EmpleadoI } from '../../shared/model/catalogos/empleado';
 import { PlatilloI } from '../../shared/model/catalogos/platillo';
+import { MenuI } from '../../shared/model/catalogos/menu';
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +20,22 @@ export class LayoutComService {
   private mostrarBotonesAltaListarSubject$ = new BehaviorSubject<boolean>(this.mostrar_botones_alta_listar)
   private buttonNuevoRegistroSubject$ = new BehaviorSubject<boolean>(this.nuevo_registro_clicked)
   private buttonListarRegistrosSubject$ = new BehaviorSubject<boolean>(this.listar_registros_clicked)
+
   private editarEmpleadoSubject$ = new ReplaySubject<EmpleadoI>(1)
   private editarPlatilloSubject$ = new ReplaySubject<PlatilloI>(1)
+  private editarMenuSubject$ = new ReplaySubject<MenuI>(1)
+
   private userLoggedSubject$ = new BehaviorSubject<boolean>(this.userLogged)
 
   sideNavMenuChanged$ = this.sideNavMenuSubject$.asObservable();
   botonesAltaLista$ = this.mostrarBotonesAltaListarSubject$.asObservable();
   buttonNuevoRegistroClicked$ = this.buttonNuevoRegistroSubject$.asObservable();
   buttonListarRegistrosClicked$ = this.buttonListarRegistrosSubject$.asObservable();
+  
   editarEmpleadoSelected$ = this.editarEmpleadoSubject$.asObservable();
   editarPlatilloSelected$ = this.editarPlatilloSubject$.asObservable();
+  editarMenuSelected$ = this.editarMenuSubject$.asObservable();
+  
   useLogged$ = this.userLoggedSubject$.asObservable();
 
   constructor() { }
@@ -60,6 +67,10 @@ export class LayoutComService {
   informarPlatilloEditar(platillo: PlatilloI){  
     this.editarPlatilloSubject$.next(platillo)
   }
+
+  informarMenuEditar(menu: MenuI){  
+    this.editarMenuSubject$.next(menu)
+  }  
 
   listarRegistrosClicked(clicked: boolean) {
     this.buttonListarRegistrosSubject$.next(clicked)

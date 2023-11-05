@@ -1,0 +1,165 @@
+
+<form [formGroup]="platilloForm" class="normal-form" #formDirective="ngForm">
+    <mat-accordion class="example-headers-align">   
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle #matPanel1>
+            <div class="center-spinner" *ngIf="isLoading('loading')">
+                <app-spinner [overlay]=true></app-spinner>
+            </div>
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'violet'}">
+                    Platillo
+                </mat-panel-title>
+                <mat-panel-description>
+                    Datos
+                    <mat-icon>fastfood</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class='controls_panel1'>                
+                <mat-grid-list cols = "2" rowHeight = "330px">
+                    <mat-grid-tile>            
+                        <div class="controles-container"> 
+                            <mat-form-field [ngStyle]="{'margin-left.px': 10}">
+                                <input matInput placeholder="Desc. Corta" formControlName="desc_corta"
+                                    (keydown.enter) = "$event.preventDefault()">
+                                <mat-error>Campo requerido.</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput placeholder="Desc. Larga" formControlName="desc_larga"
+                                    (keydown.enter) = "$event.preventDefault()">
+                                <mat-error>Campo requerido.</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput placeholder="Acompañamiento" formControlName="acompanamiento"
+                                    (keydown.enter) = "$event.preventDefault()">                                
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput placeholder="Guarnicion" formControlName="guarnicion"
+                                    (keydown.enter) = "$event.preventDefault()">                                
+                            </mat-form-field>
+                        </div>                        
+                    </mat-grid-tile>
+                    <mat-grid-tile>                                                            
+                        <div class="controles-container">
+                            <mat-form-field [ngStyle]="{'margin-left.px':10, 'margin-top.px':5}">
+                                <mat-label>Tiempo servicio</mat-label>
+                                <select matNativeControl required formControlName="tiempo_alimento">
+                                    <option label = "Seleccione" selected></option>
+                                    <option value = "Desayuno">Desayuno</option>
+                                    <option value = "Comida">Comida</option>
+                                    <option value = "Cena">Cena</option>
+                                </select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Categoria</mat-label>
+                                <select matNativeControl required 
+                                    (ngModelChange)="onCategoriaSelection($event)"
+                                    formControlName="idCategoria">
+                                    <option label = "Seleccione" selected></option>
+                                    <option *ngFor = "let cate of categorias"
+                                        [value] = "cate.idCategoria">
+                                        {{cate.descripcion}}
+                                    </option>
+                                </select>
+                            </mat-form-field>                                   
+                            <mat-grid-list [cols]="2">
+                                <mat-grid-tile>
+                                    <div class="controles-container"> 
+                                    <mat-form-field [ngStyle]="{'margin-left.px': 10}">
+                                        <input matInput placeholder="Tiempo preparacion" 
+                                        formControlName="tiempo_preparacion"
+                                        (keydown.enter) = "$event.preventDefault()">                            
+                                        <mat-error *ngIf="platilloForm.controls['tiempo_preparacion'].hasError('pattern')">
+                                            Escriba solo numeros
+                                        </mat-error>                                        
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Status</mat-label>
+                                        <select matNativeControl [ngStyle]="{'margin-left.px': 10}">
+                                            required formControlName="status">
+                                            <option label = "Seleccione" selected></option>
+                                            <option value = "Activo">Inactivo</option>
+                                            <option value = "Inactivo">Inactivo</option>
+                                        </select>        
+                                    </mat-form-field>
+                                    </div>
+                                </mat-grid-tile>
+                                <mat-grid-tile [ngStyle]="{'max-width.px': 150, 'margin-left.px':20}">
+                                    <div class="controles-container"> 
+                                    <mat-form-field [ngStyle]="{'margin-left.px': 8}">
+                                        <input matInput placeholder="Costo" formControlName="costo"
+                                        (keydown.enter) = "$event.preventDefault()">                            
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <input matInput placeholder="Precio" formControlName="precio"
+                                        (keydown.enter) = "$event.preventDefault()">                            
+                                        <mat-error *ngIf="platilloForm.controls['precio'].hasError('pattern')">
+                                            Escriba solo numeros
+                                        </mat-error>                                        
+                                        <mat-error *ngIf="platilloForm.controls['precio'].hasError('required')">
+                                            Campo requerido
+                                        </mat-error>                                                                                
+                                    </mat-form-field>
+                                    </div>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </div>              
+                    </mat-grid-tile>        
+                </mat-grid-list>
+            </div>                
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+            <div class="center-spinner" *ngIf="isLoading('loading')">
+                <app-spinner [overlay]=true></app-spinner>
+            </div>
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'green'}">
+                    Ingredientes
+                </mat-panel-title>
+                <mat-panel-description>                    
+                    receta
+                    <mat-icon>short_text</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>            
+                <div class="controles-container">
+                    <mat-form-field [ngStyle]="{'max-width.px': 300}">
+                        <textarea matInput placeholder="Ingredientes" 
+                            formControlName="ingredientes">     
+                        </textarea>
+                    </mat-form-field>            
+                    <mat-form-field [ngStyle]="{'max-width.px': 300, 'margin-left.px': 20}">
+                        <textarea matInput placeholder="Receta" 
+                            formControlName="receta">     
+                        </textarea>
+                    </mat-form-field>                                    
+                </div>            
+            <mat-action-row>
+                <button mat-button color="primary" 
+                    [disabled]="isLoading('loading')  || !anyFormChange()"
+                    (click) = "Guardar(formDirective)">
+                    Guardar
+                </button>
+            </mat-action-row>            
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle [disabled]="tipoForm == 'Alta'">
+            <div class="center-spinner" *ngIf="isLoading('uploadingFoto')">
+                <app-spinner [overlay]=true></app-spinner>
+            </div>            
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'purple'}">
+                    Fotografia
+                </mat-panel-title>
+                <mat-panel-description>                                        
+                    Asignar foto
+                    <mat-icon>camera_enhance</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="controles-container">
+                <app-upload-photo-section
+                    [idElemento] = "idPlatillo"
+                    [imageSrc] = "imageSrc"
+                    (fotoUrlUploaded) = "fotoPlatilloUrl($event)"
+                ></app-upload-photo-section>
+            </div>
+        </mat-expansion-panel>  
+    </mat-accordion>
+</form>

@@ -6,11 +6,11 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 //material
 import { MatRippleModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 //model
 import { TableColumn } from './table-column';
 //pipe
 import { ColumnValuePipe } from './column-value.pipe';
-import { EmpleadoI } from '../../model/catalogos/empleado';
 
 @Component({
   selector: 'app-table',
@@ -19,6 +19,7 @@ import { EmpleadoI } from '../../model/catalogos/empleado';
     CommonModule,
     ColumnValuePipe,
     MatTableModule, 
+    MatButtonModule,
     MatPaginatorModule, 
     MatSortModule, 
     MatRippleModule ],
@@ -32,6 +33,7 @@ export class TableComponent implements OnInit {
   dataSource = new MatTableDataSource([]);   
   displayedColumns: string[] = [];
   tableColumns: TableColumn[] = [];
+  noDataToShow: boolean = false
 
   constructor() { }
 
@@ -48,19 +50,28 @@ export class TableComponent implements OnInit {
   }
 
   @Input() set data(data: any) {
-    this.dataSource.data = data;
-    this.dataSource.paginator = this.paginator;    
-    this.dataSource.sort = this.sort;
+    if (data != undefined && data.length > 0) {
+      this.dataSource.data = data
+      this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort }
+    else {
+      this.noDataToShow = true
+    }
   }
 
-  @Input() set columns(columns: TableColumn[]) {  
+  @Input() set columns(columns: TableColumn[]) {
     this.tableColumns = columns;
-    this.displayedColumns = this.tableColumns.map((col) => col.def);    
+    this.displayedColumns = this.tableColumns.map((col) => col.def);     
   }
 
   @Output() registroTableSelected = new EventEmitter
+  @Output() irAltaRegistros = new EventEmitter
 
-  verRegistro(row: EmpleadoI) {
+  verRegistro(row: any) {
     this.registroTableSelected.emit(row)
+  }
+
+  clickNuevoRegistro() {
+    this.irAltaRegistros.emit(true)    
   }
 }

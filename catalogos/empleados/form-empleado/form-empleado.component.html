@@ -81,7 +81,8 @@
                             <mat-form-field [ngStyle]="{'margin-top.px':5}">
                                 <mat-label>Departamento</mat-label>
                                 <select matNativeControl required #matSelectDepto
-                                    (ngModelChange)="onDepartamentoSelection($event)" formControlName="idDepto">
+                                    (ngModelChange)="onDepartamentoSelection($event)" 
+                                    formControlName="idDepto">
                                     <option label="Seleccione" selected></option>
                                     <option *ngFor="let depto of departamentos" [value]="depto.idDepto">
                                         {{depto.departamento}}
@@ -240,11 +241,11 @@
             </mat-expansion-panel-header>            
             <div class="controles-container">
                 <app-upload-photo-section
-                    [idElemento] = "idEmpleado"
+                    [idElemento] = "idEmpleado" 
                     [imageSrc] = "imageSrc"
-                    (fotoUrlUploaded) = "fotoEmpleadoUrl($event)"
-                ></app-upload-photo-section>
+                    (fotoUrlUploaded) = "fotoEmpleadoUrl($event)">
+                </app-upload-photo-section>
             </div>
-        </mat-expansion-panel>        
+         </mat-expansion-panel>        
     </mat-accordion>
 </form>

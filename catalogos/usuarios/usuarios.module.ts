@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 //components
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
-import { TableListComponent } from './table-view/table-list.component';
 //confirm dialog
 import { ConfirmDialogModule } from '../../shared/componentes/confirm-dialog/confirm-dialog.module';
 
@@ -15,8 +14,7 @@ import { ConfirmDialogModule } from '../../shared/componentes/confirm-dialog/con
   imports: [
     CommonModule,
     UsuariosRoutingModule,
-    ConfirmDialogModule,
-    TableListComponent
+    ConfirmDialogModule,  
   ]
 })
 export class UsuariosModule { }

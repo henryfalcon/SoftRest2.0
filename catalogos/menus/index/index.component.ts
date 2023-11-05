@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //utility
 import { LayoutComService } from '../../../home/services/layout-com.service';
@@ -10,20 +10,22 @@ import { Subscription } from 'rxjs';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-
-export class IndexComponent {
+export class IndexComponent implements OnInit {
   buttonRegisterSub!: Subscription 
   butonListRegistersSub!: Subscription
-  
+
   constructor( private router: Router, 
-               private layoutCom:LayoutComService) { }
+    private layoutCom:LayoutComService) { }
+
+  ngOnInit(): void {
+  }
 
   subToBotonListar() {    
     this.layoutCom.mostrarBotonesAltaListar(true)
     this.buttonRegisterSub = this.layoutCom.buttonNuevoRegistroClicked$
     .subscribe({next: (clicked) => { 
-      if (clicked) {
-        this.router.navigate(['platillos/formulario/Alta'])
+      if (clicked) {        
+        this.router.navigate(['menus/formulario/Alta'])
       }
     }})
   }
@@ -32,7 +34,7 @@ export class IndexComponent {
     this.butonListRegistersSub = this.layoutCom.buttonListarRegistrosClicked$
     .subscribe({next: (clicked) => {
       if (clicked) {
-        this.router.navigate(['/platillos/lista'])
+        this.router.navigate(['/menus/lista'])
       }
     }})   
   }
@@ -46,6 +48,4 @@ export class IndexComponent {
     this.buttonRegisterSub.unsubscribe()
     this.butonListRegistersSub.unsubscribe()
   }
-
-
 }

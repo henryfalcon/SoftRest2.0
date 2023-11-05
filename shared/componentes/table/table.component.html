@@ -18,6 +18,20 @@
                 (click) = "verRegistro(row)"
                 *matRowDef="let row; columns: displayedColumns;">
             </mat-row>
+              <!-- Row shown when there is no matching data that will be provided to the wrapper table. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">
+                    <div [ngStyle]="{'padding.px': 15, 'color':'blue'}">
+                    No hay Registros en la base de datos. De Click en -->
+                    <span [ngStyle]="{'margin-left.px': 10}">
+                        <button mat-raised-button color="primary"
+                            (click)="clickNuevoRegistro()">                            
+                            Nuevo Registro
+                        </button>
+                    </span> 
+                    </div>
+                </td>
+            </tr>
         </mat-table>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"></mat-paginator>
     </ng-container>

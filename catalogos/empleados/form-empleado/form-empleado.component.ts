@@ -199,28 +199,30 @@ export class FormEmpleadoComponent implements OnInit {
     })    
   } 
 
-  onPuestoSelection(event: any){
+  onPuestoSelection(event: any){  
     const idPuesto = this.empleadoForm.controls['idPuesto'].getRawValue();
     this.puestos.forEach(ele=>{
       if (ele.idPuesto == idPuesto) {
         this.empleadoForm.controls['puesto'].setValue(ele.puesto)
       }
-    })        
+    })       
   }
 
   onDepartamentoSelection(event: any){
-    const idDepto = this.empleadoForm.controls['idDepto'].getRawValue();
-    this.setDepartamentoFormValue(idDepto);
-    this.puestos.forEach(ele=>{
-      if (ele.idDepto == idDepto){
-        ele.deshabilitar = false
-      } 
-      else { 
-        ele.deshabilitar = true 
-      }
-    });
-    this.selectedPuestoDefault = "Seleccione"
-    this.empleadoForm.controls['puesto'].setValue('');
+    setTimeout(() => {
+      const idDepto = this.empleadoForm.controls['idDepto'].getRawValue();
+      this.setDepartamentoFormValue(idDepto);
+      this.puestos.forEach(ele=>{
+        if (ele.idDepto == idDepto){
+          ele.deshabilitar = false
+        } 
+        else { 
+          ele.deshabilitar = true 
+        }
+      });
+      this.selectedPuestoDefault = "Seleccione"
+      this.empleadoForm.controls['puesto'].setValue('');      
+    }, 0);
   } 
 
   getNombreCompleto(emp: EmpleadoI): string {
@@ -300,7 +302,7 @@ export class FormEmpleadoComponent implements OnInit {
     setTimeout(() => {
       this.unSubscribeEmpleadoEditar = this.getEmpleadoEditarSvc.editarEmpleadoSelected$.pipe(take(1))
       .subscribe({      
-        next: (empleado) => {           
+        next: (empleado) => {             
           this.empleado = empleado
           this.get_Data_Alterna();
           this.IniciarFormGroup()          

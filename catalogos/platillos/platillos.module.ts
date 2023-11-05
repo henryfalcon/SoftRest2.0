@@ -7,11 +7,10 @@ import { PlatillosRoutingModule } from './platillos-routing.module';
 import { ConfirmDialogModule } from '../../shared/componentes/confirm-dialog/confirm-dialog.module';
 //components
 import { IndexComponent } from './index/index.component';
-import { AltaPlatilloComponent } from './alta-platillo/alta-platillo.component';
 import { UploadPhotoSectionComponent } from 'src/app/shared/componentes/upload-photo-section/upload-photo-section.component';
 import { ListaPlatillosComponent } from './lista-platillos/lista-platillos.component';
-import { EditPlatilloComponent } from './edit-platillo/edit-platillo.component';
 import { TableComponent } from '../../shared/componentes/table/table.component';
+import { FormPlatilloComponent } from './form-platillo/form-platillo.component';
 //utils
 import { SpinnerModule } from 'src/app/shared/componentes/spinner/spinner.module';
 //material
@@ -23,15 +22,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     IndexComponent,
+    FormPlatilloComponent,
     ListaPlatillosComponent,
-    AltaPlatilloComponent,
-    EditPlatilloComponent
   ],
   imports: [
     CommonModule,
@@ -40,20 +38,20 @@ import { MatCardModule } from '@angular/material/card';
     //routing
     PlatillosRoutingModule,
     //utils
-    ConfirmDialogModule, 
+    ConfirmDialogModule,
     TableComponent,
     SpinnerModule,
     UploadPhotoSectionComponent,
     //material
-    MatFormFieldModule,  
+    MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
     MatGridListModule,
-    MatInputModule, 
+    MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatExpansionModule, 
+    MatExpansionModule,
     MatCardModule,
   ]
 })

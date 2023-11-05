@@ -1,0 +1,94 @@
+<form [formGroup]="menuForm" class="normal-form" #formDirective="ngForm">
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle #matPanel1>
+            <div class="center-spinner" *ngIf="isLoading('loading')">
+                <app-spinner [overlay]=true></app-spinner>
+            </div>
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'violet'}">
+                    Menus
+                </mat-panel-title>
+                <mat-panel-description>
+                    Datos
+                    <mat-icon>horizontal_split</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class='controls_panel1'>
+                <mat-grid-list cols="1" rowHeight="330px">
+                    <mat-grid-tile>
+                        <div class="controles-container">
+                            <mat-form-field [ngStyle]="{'margin-left.px': 10}">
+                                <input matInput placeholder="Descripcion" formControlName="menu"
+                                    (keydown.enter)="$event.preventDefault()">
+                                <mat-error>Campo requerido.</mat-error>
+                            </mat-form-field>                            
+                            <mat-form-field>
+                                <input formControlName="fecha_inicio" (keydown.enter)="$event.preventDefault()"
+                                    matInput [matDatepicker]="pickerfecha" placeholder="Fecha de Inicio">
+                                <mat-datepicker-toggle matSuffix [for]="pickerfecha"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerfecha></mat-datepicker>
+                                <mat-error>Campo requerido.</mat-error>
+                            </mat-form-field>  
+                            <mat-form-field>
+                                <mat-label>Status</mat-label>
+                                <select matNativeControl required formControlName="status">                                
+                                    <option value="Alta">Alta</option>
+                                    <option value="Baja">Baja</option>
+                                </select>
+                                <mat-error>Campo requerido.</mat-error>
+                            </mat-form-field>                            
+                        </div>                        
+                    </mat-grid-tile>
+                </mat-grid-list>         
+            </div>
+            <mat-action-row>
+                <button mat-button color="primary" 
+                    [disabled]="isLoading('loading')  || !anyFormChange()"
+                    (click) = "Guardar(formDirective)">
+                    Guardar
+                </button>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle [disabled]="tipoForm == 'Alta'">
+            <div class="center-spinner" *ngIf="isLoading('loading')">
+                <app-spinner [overlay]=true></app-spinner>
+            </div>            
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'green'}">
+                    Platillos
+                </mat-panel-title>
+                <mat-panel-description>                                        
+                    Asignar
+                    <mat-icon>fastfood</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>                                    
+            <div class="controles-container">
+                <app-form-menu-detalle>
+                    [idMenu] = "menu.idMenu"
+                    (irAltaRegistros)="irFormularioAlta()
+                </app-form-menu-detalle>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle [disabled]="tipoForm == 'Alta'">
+            <div class="center-spinner" *ngIf="isLoading('uploadingFoto')">
+                <app-spinner [overlay]=true></app-spinner>
+            </div>            
+            <mat-expansion-panel-header>
+                <mat-panel-title [ngStyle]="{'color': 'purple'}">
+                    Fotografia
+                </mat-panel-title>
+                <mat-panel-description>                                        
+                    Asignar foto
+                    <mat-icon>camera_enhance</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>            
+            <div class="controles-container">
+                <app-upload-photo-section
+                    [idElemento] = "idMenu"
+                    [imageSrc] = "imageSrc"
+                    (fotoUrlUploaded) = "fotoMenuUrl($event)">
+                </app-upload-photo-section>
+            </div>
+        </mat-expansion-panel>           
+    </mat-accordion>
+</form>

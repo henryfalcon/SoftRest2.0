@@ -1,0 +1,14 @@
+ <form (ngSubmit)="submit()" [formGroup]="detalleMenuForm" class="normal-form"> 
+    <div class = "center-spinner" *ngIf="isLoading('loading')">
+        <app-spinner [overlay]="true"></app-spinner>
+    </div>
+    <div class="controles-container">
+        <app-table>
+            [data]="menuDetalle"
+            [columns]="tableColumns"
+            (irAltaRegistros)="submit()"        
+            <!-- (registroTableSelected)="registroSeleccionado($event)"> -->     
+        </app-table>
+    </div>
+ </form> 
+

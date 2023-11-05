@@ -1,10 +1,11 @@
-
-<ng-template [ngIf]="menus !== undefined && menus.length > 0" [ngIfElse]="norecords">
-    <app-table-list [tableData]="menus"></app-table-list>
-</ng-template>
-
-<ng-template #norecords>    
-    <p>No existen registros de Menus en la base de datos</p>
-    <button mat-button>Registrar Menu</button>
-</ng-template>
-
+<form (ngSubmit)="submit()" class="normal-form" #formDirective="ngForm">
+    <div class="center-spinner" *ngIf="isLoading('loading')">
+        <app-spinner [overlay]=true></app-spinner>
+    </div>
+    <app-table 
+        [data]="menus"
+        [columns]="tableColumns"
+        (irAltaRegistros)="submit()"
+        (registroTableSelected) = "registroSeleccionado($event)">
+    </app-table>    
+</form>

@@ -12,12 +12,13 @@
     min-width:300px;
 }
 
-mat-card-title, mat-card-content, mat-card-footer {
+mat-card-title, mat-card-content, mat-card-footer, mat-card-actions {
     display:flex;
     justify-content: center;
 }
 
 .button{
     display:flex;
-    justify-content: flex-end;
+    justify-content: flex-end;    
 }
+

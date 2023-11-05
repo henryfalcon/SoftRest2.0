@@ -11,7 +11,7 @@
                     <mat-error *ngIf="form1.controls['username'].errors?.['required']">Correo requerido</mat-error>
             </mat-form-field>
             <mat-form-field>
-                    <input matInput type="password" placeholder="Contraseña" formControlName="password" autocomplete="off" required>
+                    <input matInput type="password" placeholder="" formControlName="password" autocomplete="off" required>
                     <mat-error *ngIf="form1.controls['password'].errors?.['required']">Contraseña Requerida</mat-error>
                     <mat-error *ngIf="form1.controls['password'].errors?.['minLength']">Mínimo de 8 Caracteres Requerido.</mat-error>
             </mat-form-field>
@@ -29,7 +29,7 @@
                     <mat-error *ngIf="form2.controls['repetir_username'].errors?.['required']">Correo requerido</mat-error>
             </mat-form-field></p>
             <p><mat-form-field>
-                    <input matInput type="password" placeholder="Contraseña" formControlName="repetir_password"  autocomplete="off" required>
+                    <input matInput type="password" placeholder="" formControlName="repetir_password"  autocomplete="off" required>
                     <mat-error *ngIf="form2.controls['repetir_password'].errors?.['required']">Contraseña Requerida</mat-error>
                     <mat-error *ngIf="form2.controls['repetir_password'].errors?.['minLength']">Mínimo de 8 Caracteres Requerido.</mat-error>
             </mat-form-field>

@@ -16,10 +16,18 @@
                 <mat-error *ngIf="form.controls['password'].errors?.['minLength']">Mínimo de 8 Caracteres Requerido.</mat-error>
             </mat-form-field>
             <div class="button">
-                <button type="submit" mat-button>
+                <button type="submit" mat-button color="primary">
                     Login
                 </button>
             </div>        
         </form>    
     </mat-card-content>
+    <mat-card-actions>
+        <button mat-button [routerLink]="['/registrarse']">
+            Registrarse
+        </button>
+        <button mat-button (click)="restablecerPassword()">
+            Olvide la contraseña
+        </button>
+    </mat-card-actions>
 </mat-card>    

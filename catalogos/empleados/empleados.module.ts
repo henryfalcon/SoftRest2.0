@@ -6,8 +6,6 @@ import { EmpleadosRoutingModule } from './empleados-routing.module';
 //components
 import { IndexComponent } from './index/index.component';
 import { ListaEmpleadosComponent } from './lista-empleados/lista-empleados.component';
-import { AltaEmpleadoComponent } from './alta-empleado/alta-empleado.component';
-import { EditEmpleadoComponent } from './edit-empleado/edit-empleado.component';
 import { UploadPhotoSectionComponent } from 'src/app/shared/componentes/upload-photo-section/upload-photo-section.component';
 import { TableComponent } from '../../shared/componentes/table/table.component';
 import { FormEmpleadoComponent } from './form-empleado/form-empleado.component';
@@ -30,9 +28,7 @@ import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [  
     ListaEmpleadosComponent, 
-    AltaEmpleadoComponent,   
     IndexComponent, 
-    EditEmpleadoComponent,
     FormEmpleadoComponent
   ],
   imports: [

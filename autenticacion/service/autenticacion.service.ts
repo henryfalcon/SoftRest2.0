@@ -21,9 +21,10 @@ export class AutenticacionService {
     await this.afAuth.signInWithEmailAndPassword(email, password)
     .then((data) => {          
       if (data.user?.emailVerified) {
+        localStorage.setItem('userId', data.user.uid)
         return true
       } else {        
-        const err = '2343'
+        const err = '2343' //2343 es inventado... solo para notificar a la vista que el usuario no tiene el email verificado
         throw new Error(err)
       }      
     }, error  => {
@@ -35,6 +36,7 @@ export class AutenticacionService {
   async logout() {
     await this.afAuth.signOut()
     .then(() => { 
+        localStorage.removeItem('userId')
         return true;      
       },
       error => {
@@ -54,6 +56,19 @@ export class AutenticacionService {
       }
     )
   }
+
+  public async resetPassword(email: string) {
+    return await this.afAuth.sendPasswordResetEmail(email)
+      .then(() => { 
+        return true         
+      }
+      , error => {
+        const err = this.transErr.traducir(error)
+        throw new Error(err)
+      }
+    )
+  }
+
 
   private errorHandler(error: FbErrorI) {
     let trans = new TraducirErrores();

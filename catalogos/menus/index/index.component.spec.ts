@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AltaEmpleadoComponent } from './alta-empleado.component';
+import { IndexComponent } from './index.component';
 
-describe('FormularioComponent', () => {
-  let component: AltaEmpleadoComponent;
-  let fixture: ComponentFixture<AltaEmpleadoComponent>;
+describe('IndexComponent', () => {
+  let component: IndexComponent;
+  let fixture: ComponentFixture<IndexComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AltaEmpleadoComponent ]
+      declarations: [ IndexComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AltaEmpleadoComponent);
+    fixture = TestBed.createComponent(IndexComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

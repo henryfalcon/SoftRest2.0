@@ -64,10 +64,9 @@ export class ListaPlatillosComponent implements OnInit {
   registroSeleccionado(platillo: PlatilloI){
     this.platilloEditSelectionSvc.informarPlatilloEditar(platillo)        
     setTimeout(() => {
-      this.router.navigate(['/platillos/edit'])           
+      this.router.navigate(['/platillos/formulario/Edicion'])           
     }, 800)
   }
-
 
   mostrarErrorMensaje(mensaje: string) {
     const dialogconfirm = this.dialog.open(ConfirmDialogComponent, {
@@ -80,8 +79,8 @@ export class ListaPlatillosComponent implements OnInit {
     dialogconfirm.afterClosed().pipe(take(1)).subscribe();
   }
   
-  submit(){    
-    this.router.navigate(['/empleados/alta']);
+  submit(){        
+    this.router.navigate(['platillos/formulario/Alta'])
   }
 
   isLoading(key_loading: string): boolean {

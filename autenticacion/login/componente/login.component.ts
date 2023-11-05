@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.valid) {
+/*     if (this.form.valid) {
       const { username, password } = this.form.value;
        const authenticating = this.auth_svc.login(username, password);
       this.isLoadingSvc.add(authenticating, { key: "loading" });
@@ -57,10 +57,25 @@ export class LoginComponent implements OnInit {
           this.layouSvc.usuarioLogin = true;
           this.router.navigate(['/dashboard'])
         }, error => this.catchErrorHandler(error)) 
-
-      //this.layouSvc.usuarioLogin = true;
-      //this.router.navigate(['/empleados/lista'])
     }
+ */    
+    this.layouSvc.usuarioLogin = true;
+    this.router.navigate(['/menus/lista'])
+  }
+
+  restablecerPassword(){
+    if (this.form.controls['username'].invalid) {
+      this.mostrarMensaje("El correo es inválido. Escribalo correctamente")      
+      return
+    }
+    const email = this.form.controls['username'].value
+    this.auth_svc.resetPassword(email).then(      
+      ()=>{ 
+        const mensaje = `Se ha enviado un correo a su email. 
+        Siga los pasos para el restablecimiento de la contraseña`
+        this.mostrarMensaje(mensaje) 
+      }
+    )
   }
 
   mostrarMensaje(mensaje: string) {
